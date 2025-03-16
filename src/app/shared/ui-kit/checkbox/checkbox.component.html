@@ -1,0 +1,12 @@
+<div class="checkbox-container" [ngClass]="elementData().cssClasses" [ngStyle]="elementData().cssStyles">
+  @if (elementData().modelName) {
+    <input type="checkbox" [formControl]="control">
+  } @else if (elementData().action) {
+    @if (elementData().action === 'all') {
+      <input type="checkbox" [value]="elementData().value" (click)="onToggleAllClick(elementData().value)">
+    }
+  }
+
+  <div class="checkmark"></div>
+  {{ elementData().placeholder }}
+</div>

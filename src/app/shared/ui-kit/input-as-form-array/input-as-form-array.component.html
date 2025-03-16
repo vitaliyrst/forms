@@ -1,0 +1,37 @@
+<div class="inputs-form-array-container" >
+  @for (control of formArray.controls; let index = $index; track index) {
+    <div class="wrapper">
+      <input
+        class="form-control"
+        [id]="index"
+        [formControl]="isFormControl(control)"
+        [type]="elementData().type"
+        [placeholder]="elementData().placeholder + (index === 0 ? '' : ' ' + index)"
+        [ngClass]="elementData().cssClasses"
+        [ngStyle]="elementData().cssStyles"
+      >
+
+      @for (button of elementData().buttons; track $index) {
+        @if (button.type === 'remove' && index > 0 && index === formArray.controls.length - 1) {
+          <button class="button remove-button" type="button" (click)="onRemoveClick(index)">
+            - {{ button.name }}
+          </button>
+        }
+
+        @if (button.type === 'add' && index === formArray.controls.length - 1) {
+          <button class="button add-button" type="button" (click)="onAddClick()">
+            + {{ button.name }}
+          </button>
+        }
+      }
+    </div>
+  }
+
+  @if (elementData().errors && elementData().errors.length) {
+    @for (error of elementData().errors; track $index) {
+      @if (formArray.dirty && formArray.errors && formArray?.errors[error.type]) {
+        <span class="error">{{ error.text }}</span>
+      }
+    }
+  }
+</div>

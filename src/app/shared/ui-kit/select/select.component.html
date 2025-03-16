@@ -1,0 +1,37 @@
+<div
+  class="select-container"
+  [ngClass]="{'open': isOptionListOpen, 'error': control.dirty && control.errors}"
+  (click)="toggleDropdown()"
+>
+  <div class="wrapper">
+    <div class="selected-name">
+      @if (selectedLabel) {
+        {{ selectedLabel }}
+      } @else if (elementData().defaultOption.name) {
+        {{ elementData().defaultOption.name }}
+      } @else {
+        {{ elementData().placeholder }}
+      }
+    </div>
+
+    <img class="arrow-icon" width="12" height="12" src="/arrow_down.svg" alt="arrow icon">
+
+    @if (isOptionListOpen) {
+      <ul class="option-list">
+        @for (option of elementData().options; track $index) {
+          <li class="option" (click)="selectOption($event, option)">
+            {{ option.name }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (elementData().errors && elementData().errors.length) {
+    @for (error of elementData().errors; track $index) {
+      @if (control.dirty && control.errors && control?.errors[error.type]) {
+        <span class="error">{{ error.text }}</span>
+      }
+    }
+  }
+</div>

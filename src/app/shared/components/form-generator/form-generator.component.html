@@ -1,0 +1,48 @@
+<form class="dynamic-form" [formGroup]="form">
+  <h2 class="form-title">{{ formSegment().name }}</h2>
+
+  @for (row of formSegment().rows; let rowIndex = $index; track rowIndex) {
+    <div class="fields-container" [ngClass]="row.cssClasses" [ngStyle]="row.cssStyles">
+      <label class="field-label" [ngClass]="{'required': row.required}">{{ row.label }}</label>
+      <div class="form-field" [formGroupName]="rowIndex">
+        @for (element of row.children; let elementIndex = $index; track elementIndex) {
+          @if (isInput(element)) {
+            @if (element.typeOfControl === 'asControl') {
+              <app-input [form]="form" [groupName]="rowIndex" [elementData]="element"></app-input>
+            } @else {
+              <app-input-as-form-array [form]="form" [groupName]="rowIndex" [elementData]="element"></app-input-as-form-array>
+            }
+          } @else if (isCheckbox(element)) {
+            <app-checkbox [form]="form" [groupName]="rowIndex" [elementData]="element"></app-checkbox>
+          } @else if (isSelect(element)) {
+            <app-select [formControlName]="element.modelName" [form]="form" [groupName]="rowIndex"  [elementData]="element"></app-select>
+          }
+        }
+
+        @if (row.subtext) {
+          <span class="subtext">{{ row.subtext }}</span>
+        }
+      </div>
+    </div>
+  }
+
+  <div class="buttons-container">
+    <div></div>
+    <div class="wrapper">
+      @for (button of formSegment().buttons; track $index) {
+        @if (button.type === 'confirm') {
+          <button
+            class="button"
+            type="button"
+            [class.disabled]="!form.dirty"
+            [ngClass]="button.cssClasses"
+            [ngStyle]="button.cssStyles"
+            (click)="onConfirmClick(button)"
+          >
+            {{ button.name }}
+          </button>
+        }
+      }
+    </div>
+  </div>
+</form>

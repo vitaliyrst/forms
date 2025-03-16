@@ -1,18 +1,3 @@
-# Forms
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-## Data.json
-
-```json
 [
   {
     "componentType": "form",
@@ -138,9 +123,20 @@ ng serve
             "typeOfControl": "asArray",
             "modelName": "higherEducation",
             "placeholder": "Higher education",
-            "withAddButton": {
-              "name": "Add more"
-            },
+            "buttons": [
+              {
+                "name": "Add",
+                "type": "add",
+                "cssClasses": [],
+                "cssStyles": {}
+              },
+              {
+                "name": "Remove",
+                "type": "remove",
+                "cssClasses": [],
+                "cssStyles": {}
+              }
+            ],
             "cssClasses": [],
             "cssStyles": {
               "width": "250px"
@@ -248,8 +244,8 @@ ng serve
           },
           {
             "componentType": "checkbox",
-            "modelName": "all",
             "action": "all",
+            "value": false,
             "placeholder": "Select All",
             "cssClasses": [],
             "cssStyles": {
@@ -261,4 +257,3 @@ ng serve
     ]
   }
 ]
-```
