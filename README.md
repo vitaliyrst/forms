@@ -138,9 +138,20 @@ ng serve
             "typeOfControl": "asArray",
             "modelName": "higherEducation",
             "placeholder": "Higher education",
-            "withAddButton": {
-              "name": "Add more"
-            },
+            "buttons": [
+              {
+                "name": "Add",
+                "type": "add",
+                "cssClasses": [],
+                "cssStyles": {}
+              },
+              {
+                "name": "Remove",
+                "type": "remove",
+                "cssClasses": [],
+                "cssStyles": {}
+              }
+            ],
             "cssClasses": [],
             "cssStyles": {
               "width": "250px"
@@ -248,8 +259,8 @@ ng serve
           },
           {
             "componentType": "checkbox",
-            "modelName": "all",
             "action": "all",
+            "value": false,
             "placeholder": "Select All",
             "cssClasses": [],
             "cssStyles": {
